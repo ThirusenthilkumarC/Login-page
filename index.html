@@ -1,87 +1,462 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+
+    <title>Nova — Login</title>
 
     <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Arial, sans-serif;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        body{
-            background:#4CAF50;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            height:100vh;
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #050505;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
         }
 
-        .login-box{
-            background:#fff;
-            padding:30px;
-            border-radius:10px;
-            width:320px;
-            box-shadow:0 5px 15px rgba(0,0,0,0.2);
+        /* ================= BACKGROUND ================= */
+
+        .glow {
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            filter: blur(150px);
+            opacity: 0.25;
+
+            animation: float 8s ease-in-out infinite;
         }
 
-        .login-box h2{
-            text-align:center;
-            margin-bottom:20px;
+        .glow-one {
+            background: #7c3aed;
+            top: -180px;
+            left: -120px;
         }
 
-        input{
-            width:100%;
-            padding:12px;
-            margin:10px 0;
-            border:1px solid #ccc;
-            border-radius:5px;
-            outline:none;
+        .glow-two {
+            background: #06b6d4;
+            right: -150px;
+            bottom: -180px;
+            animation-delay: 2s;
         }
 
-        button{
-            width:100%;
-            padding:12px;
-            background:#4CAF50;
-            color:white;
-            border:none;
-            border-radius:5px;
-            font-size:16px;
-            cursor:pointer;
+        /* ================= PARTICLES ================= */
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+
+            animation: particle 8s linear infinite;
         }
 
-        button:hover{
-            background:#45a049;
+        .p1 {
+            left: 15%;
+            top: 70%;
         }
 
-        p{
-            text-align:center;
-            margin-top:15px;
+        .p2 {
+            left: 80%;
+            top: 30%;
+            animation-delay: 2s;
         }
 
-        a{
-            text-decoration:none;
-            color:#4CAF50;
+        .p3 {
+            left: 50%;
+            top: 15%;
+            animation-delay: 4s;
+        }
+
+        .p4 {
+            left: 30%;
+            top: 30%;
+            animation-delay: 1s;
+        }
+
+        /* ================= LOGIN CARD ================= */
+
+        .login-container {
+            width: 420px;
+            max-width: 90%;
+
+            padding: 45px 40px;
+
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(25px);
+
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 28px;
+
+            box-shadow:
+                0 30px 100px rgba(0, 0, 0, 0.5);
+
+            position: relative;
+            z-index: 10;
+
+            animation: cardReveal 1s ease forwards;
+        }
+
+        /* ================= LOGO ================= */
+
+        .logo {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            margin-bottom: 35px;
+        }
+
+        .logo span {
+            color: #8b5cf6;
+        }
+
+        /* ================= TITLE ================= */
+
+        .title {
+            text-align: center;
+            margin-bottom: 8px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 35px;
+        }
+
+        /* ================= INPUT ================= */
+
+        .input-group {
+            position: relative;
+            margin-bottom: 22px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 16px 18px;
+
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+
+            border-radius: 14px;
+
+            color: white;
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.3s;
+        }
+
+        .input-group input::placeholder {
+            color: #777;
+        }
+
+        .input-group input:focus {
+            border-color: #8b5cf6;
+
+            box-shadow:
+                0 0 0 3px rgba(139, 92, 246, 0.12);
+        }
+
+        /* ================= OPTIONS ================= */
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #999;
+        }
+
+        .remember input {
+            accent-color: #8b5cf6;
+        }
+
+        .forgot {
+            color: #a78bfa;
+            text-decoration: none;
+        }
+
+        .forgot:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+
+            border: none;
+            border-radius: 14px;
+
+            background: linear-gradient(
+                90deg,
+                #7c3aed,
+                #06b6d4
+            );
+
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.4s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 15px 35px rgba(124, 58, 237, 0.3);
+        }
+
+        /* ================= DIVIDER ================= */
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            color: #666;
+            font-size: 12px;
+
+            margin: 28px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            height: 1px;
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ================= SOCIAL ================= */
+
+        .social {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .social button {
+            padding: 13px;
+
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+
+            background: rgba(255,255,255,0.04);
+            color: white;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .social button:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+
+        /* ================= SIGNUP ================= */
+
+        .signup {
+            text-align: center;
+            margin-top: 28px;
+
+            color: #777;
+            font-size: 14px;
+        }
+
+        .signup a {
+            color: #a78bfa;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* ================= ANIMATIONS ================= */
+
+        @keyframes cardReveal {
+
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.96);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes float {
+
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(80px, -60px);
+            }
+        }
+
+        @keyframes particle {
+
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: translateY(-180px);
+                opacity: 0;
+            }
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 500px) {
+
+            .login-container {
+                padding: 35px 25px;
+            }
+
+            .title {
+                font-size: 27px;
+            }
         }
     </style>
 </head>
+
 <body>
 
-<div class="login-box">
-    <h2>Login</h2>
+    <!-- Background -->
 
-    <form>
-        <input type="text" placeholder="Username" required>
-        <input type="password" placeholder="Password" required>
-        <button type="submit">Login</button>
-    </form>
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
 
-    <p>Don't have an account? <a href="#">Sign Up</a></p>
-</div>
+    <div class="particle p1"></div>
+    <div class="particle p2"></div>
+    <div class="particle p3"></div>
+    <div class="particle p4"></div>
+
+
+    <!-- Login -->
+
+    <div class="login-container">
+
+        <div class="logo">
+            N<span>O</span>VA
+        </div>
+
+        <h1 class="title">
+            Welcome Back
+        </h1>
+
+        <p class="subtitle">
+            Sign in to continue your journey
+        </p>
+
+
+        <form>
+
+            <div class="input-group">
+                <input
+                    type="email"
+                    placeholder="Email address"
+                    required
+                >
+            </div>
+
+            <div class="input-group">
+                <input
+                    type="password"
+                    placeholder="Password"
+                    required
+                >
+            </div>
+
+
+            <div class="options">
+
+                <label class="remember">
+                    <input type="checkbox">
+                    Remember me
+                </label>
+
+                <a href="#" class="forgot">
+                    Forgot password?
+                </a>
+
+            </div>
+
+
+            <button class="login-btn" type="submit">
+                Sign In →
+            </button>
+
+        </form>
+
+
+        <div class="divider">
+            OR CONTINUE WITH
+        </div>
+
+
+        <div class="social">
+
+            <button>
+                Google
+            </button>
+
+            <button>
+                GitHub
+            </button>
+
+        </div>
+
+
+        <p class="signup">
+            Don't have an account?
+            <a href="#">
+                Create account
+            </a>
+        </p>
+
+    </div>
 
 </body>
 </html>
+```
