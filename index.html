@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,56 +13,99 @@
             box-sizing: border-box;
         }
 
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
         body {
             min-height: 100vh;
             font-family: Arial, Helvetica, sans-serif;
-            background: #050505;
-            color: white;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(124, 58, 237, 0.18), transparent 30%),
+                radial-gradient(circle at 85% 80%, rgba(6, 182, 212, 0.15), transparent 30%),
+                #050505;
 
+            color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
 
             overflow: hidden;
+            position: relative;
         }
 
-        /* ================= BACKGROUND ================= */
+        /* ================= BACKGROUND GLOW ================= */
 
         .glow {
             position: absolute;
-            width: 450px;
-            height: 450px;
+            width: 420px;
+            height: 420px;
             border-radius: 50%;
-            filter: blur(150px);
+            filter: blur(130px);
             opacity: 0.25;
+            pointer-events: none;
 
-            animation: float 8s ease-in-out infinite;
+            animation: float 9s ease-in-out infinite;
         }
 
         .glow-one {
             background: #7c3aed;
             top: -180px;
-            left: -120px;
+            left: -150px;
         }
 
         .glow-two {
             background: #06b6d4;
-            right: -150px;
+            right: -170px;
             bottom: -180px;
             animation-delay: 2s;
+        }
+
+        /* ================= GRID ================= */
+
+        .grid {
+            position: absolute;
+            inset: 0;
+
+            background-image:
+                linear-gradient(
+                    rgba(255, 255, 255, 0.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255, 255, 255, 0.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 50px 50px;
+
+            mask-image: linear-gradient(
+                to bottom,
+                transparent,
+                black 20%,
+                black 80%,
+                transparent
+            );
+
+            pointer-events: none;
         }
 
         /* ================= PARTICLES ================= */
 
         .particle {
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: white;
+            width: 3px;
+            height: 3px;
+
+            background: #fff;
             border-radius: 50%;
             opacity: 0.5;
 
             animation: particle 8s linear infinite;
+            pointer-events: none;
         }
 
         .p1 {
@@ -89,91 +131,146 @@
             animation-delay: 1s;
         }
 
+        .p5 {
+            left: 65%;
+            top: 75%;
+            animation-delay: 3s;
+        }
+
         /* ================= LOGIN CARD ================= */
 
         .login-container {
-            width: 420px;
-            max-width: 90%;
+            width: 430px;
+            max-width: calc(100% - 30px);
 
             padding: 45px 40px;
 
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(25px);
+            background: rgba(255, 255, 255, 0.065);
 
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+
+            border: 1px solid rgba(255, 255, 255, 0.13);
             border-radius: 28px;
 
             box-shadow:
-                0 30px 100px rgba(0, 0, 0, 0.5);
+                0 30px 100px rgba(0, 0, 0, 0.55),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
 
             position: relative;
             z-index: 10;
 
-            animation: cardReveal 1s ease forwards;
+            animation: cardReveal 0.9s ease forwards;
+        }
+
+        .login-container::before {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            border-radius: inherit;
+
+            background: linear-gradient(
+                135deg,
+                rgba(139, 92, 246, 0.08),
+                transparent 40%,
+                rgba(6, 182, 212, 0.06)
+            );
+
+            pointer-events: none;
         }
 
         /* ================= LOGO ================= */
 
         .logo {
+            position: relative;
+
             text-align: center;
+
             font-size: 28px;
             font-weight: 800;
-            letter-spacing: 4px;
-            margin-bottom: 35px;
+            letter-spacing: 5px;
+
+            margin-bottom: 34px;
         }
 
         .logo span {
             color: #8b5cf6;
+
+            text-shadow:
+                0 0 20px rgba(139, 92, 246, 0.6);
         }
 
         /* ================= TITLE ================= */
 
         .title {
+            position: relative;
+
             text-align: center;
-            margin-bottom: 8px;
+
             font-size: 32px;
+            line-height: 1.2;
+
+            margin-bottom: 9px;
         }
 
         .subtitle {
+            position: relative;
+
             text-align: center;
-            color: #888;
+
+            color: #8b8b8b;
             font-size: 14px;
-            margin-bottom: 35px;
+
+            margin-bottom: 32px;
         }
 
         /* ================= INPUT ================= */
 
         .input-group {
             position: relative;
-            margin-bottom: 22px;
+            margin-bottom: 18px;
         }
 
         .input-group input {
             width: 100%;
+
             padding: 16px 18px;
 
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.045);
 
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 14px;
 
-            color: white;
+            color: #fff;
             font-size: 15px;
 
             outline: none;
 
-            transition: 0.3s;
+            transition:
+                border 0.3s ease,
+                box-shadow 0.3s ease,
+                background 0.3s ease,
+                transform 0.3s ease;
         }
 
         .input-group input::placeholder {
-            color: #777;
+            color: #707070;
+        }
+
+        .input-group input:hover {
+            background: rgba(255, 255, 255, 0.065);
         }
 
         .input-group input:focus {
             border-color: #8b5cf6;
 
+            background: rgba(139, 92, 246, 0.055);
+
             box-shadow:
-                0 0 0 3px rgba(139, 92, 246, 0.12);
+                0 0 0 3px rgba(139, 92, 246, 0.12),
+                0 0 25px rgba(139, 92, 246, 0.08);
         }
 
         /* ================= OPTIONS ================= */
@@ -184,58 +281,81 @@
             align-items: center;
 
             font-size: 13px;
-            margin-bottom: 25px;
+
+            margin: 4px 0 25px;
         }
 
         .remember {
             display: flex;
             align-items: center;
+
             gap: 8px;
+
             color: #999;
+            cursor: pointer;
         }
 
         .remember input {
             accent-color: #8b5cf6;
+            cursor: pointer;
         }
 
         .forgot {
             color: #a78bfa;
+
             text-decoration: none;
+
+            transition: 0.3s;
         }
 
         .forgot:hover {
-            text-decoration: underline;
+            color: #c4b5fd;
         }
 
-        /* ================= BUTTON ================= */
+        /* ================= LOGIN BUTTON ================= */
 
         .login-btn {
             width: 100%;
+
             padding: 16px;
 
             border: none;
             border-radius: 14px;
 
-            background: linear-gradient(
-                90deg,
-                #7c3aed,
-                #06b6d4
-            );
+            background:
+                linear-gradient(
+                    100deg,
+                    #7c3aed,
+                    #8b5cf6,
+                    #06b6d4
+                );
 
-            color: white;
+            background-size: 200% 100%;
+
+            color: #fff;
+
             font-size: 15px;
             font-weight: 700;
 
             cursor: pointer;
 
-            transition: 0.4s;
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                background-position 0.5s ease;
         }
 
         .login-btn:hover {
             transform: translateY(-3px);
 
+            background-position: 100% 0;
+
             box-shadow:
-                0 15px 35px rgba(124, 58, 237, 0.3);
+                0 15px 40px rgba(124, 58, 237, 0.35);
+        }
+
+        .login-btn:active {
+            transform: translateY(-1px);
         }
 
         /* ================= DIVIDER ================= */
@@ -243,10 +363,12 @@
         .divider {
             display: flex;
             align-items: center;
+
             gap: 12px;
 
             color: #666;
-            font-size: 12px;
+            font-size: 11px;
+            letter-spacing: 1px;
 
             margin: 28px 0;
         }
@@ -254,8 +376,10 @@
         .divider::before,
         .divider::after {
             content: "";
+
             height: 1px;
             flex: 1;
+
             background: rgba(255, 255, 255, 0.1);
         }
 
@@ -263,33 +387,47 @@
 
         .social {
             display: grid;
+
             grid-template-columns: 1fr 1fr;
+
             gap: 12px;
         }
 
         .social button {
             padding: 13px;
 
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
 
-            background: rgba(255,255,255,0.04);
-            color: white;
+            background: rgba(255, 255, 255, 0.035);
+
+            color: #fff;
+
+            font-size: 14px;
 
             cursor: pointer;
 
-            transition: 0.3s;
+            transition:
+                background 0.3s ease,
+                transform 0.3s ease,
+                border 0.3s ease;
         }
 
         .social button:hover {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.09);
+
+            border-color: rgba(255, 255, 255, 0.2);
+
             transform: translateY(-2px);
         }
 
         /* ================= SIGNUP ================= */
 
         .signup {
+            position: relative;
+
             text-align: center;
+
             margin-top: 28px;
 
             color: #777;
@@ -298,28 +436,37 @@
 
         .signup a {
             color: #a78bfa;
+
             text-decoration: none;
+
             font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .signup a:hover {
+            color: #c4b5fd;
         }
 
         /* ================= ANIMATIONS ================= */
 
         @keyframes cardReveal {
-
             from {
                 opacity: 0;
                 transform: translateY(40px) scale(0.96);
+                filter: blur(8px);
             }
 
             to {
                 opacity: 1;
                 transform: translateY(0) scale(1);
+                filter: blur(0);
             }
         }
 
         @keyframes float {
-
-            0%, 100% {
+            0%,
+            100% {
                 transform: translate(0, 0);
             }
 
@@ -329,7 +476,6 @@
         }
 
         @keyframes particle {
-
             0% {
                 transform: translateY(0);
                 opacity: 0;
@@ -349,12 +495,47 @@
 
         @media (max-width: 500px) {
 
+            body {
+                padding: 15px 0;
+                overflow-y: auto;
+            }
+
             .login-container {
-                padding: 35px 25px;
+                padding: 35px 24px;
+                border-radius: 24px;
+            }
+
+            .logo {
+                font-size: 25px;
+                margin-bottom: 28px;
             }
 
             .title {
                 font-size: 27px;
+            }
+
+            .subtitle {
+                font-size: 13px;
+                margin-bottom: 27px;
+            }
+
+            .options {
+                font-size: 12px;
+            }
+
+            .social {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ================= REDUCED MOTION ================= */
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
             }
         }
     </style>
@@ -367,15 +548,18 @@
     <div class="glow glow-one"></div>
     <div class="glow glow-two"></div>
 
+    <div class="grid"></div>
+
     <div class="particle p1"></div>
     <div class="particle p2"></div>
     <div class="particle p3"></div>
     <div class="particle p4"></div>
+    <div class="particle p5"></div>
 
 
-    <!-- Login -->
+    <!-- Login Card -->
 
-    <div class="login-container">
+    <main class="login-container">
 
         <div class="logo">
             N<span>O</span>VA
@@ -395,15 +579,20 @@
             <div class="input-group">
                 <input
                     type="email"
+                    name="email"
                     placeholder="Email address"
+                    autocomplete="email"
                     required
                 >
             </div>
 
+
             <div class="input-group">
                 <input
                     type="password"
+                    name="password"
                     placeholder="Password"
+                    autocomplete="current-password"
                     required
                 >
             </div>
@@ -412,18 +601,31 @@
             <div class="options">
 
                 <label class="remember">
-                    <input type="checkbox">
-                    Remember me
+
+                    <input
+                        type="checkbox"
+                        name="remember"
+                    >
+
+                    <span>Remember me</span>
+
                 </label>
 
-                <a href="#" class="forgot">
+
+                <a
+                    href="#"
+                    class="forgot"
+                >
                     Forgot password?
                 </a>
 
             </div>
 
 
-            <button class="login-btn" type="submit">
+            <button
+                class="login-btn"
+                type="submit"
+            >
                 Sign In →
             </button>
 
@@ -437,11 +639,11 @@
 
         <div class="social">
 
-            <button>
+            <button type="button">
                 Google
             </button>
 
-            <button>
+            <button type="button">
                 GitHub
             </button>
 
@@ -449,14 +651,16 @@
 
 
         <p class="signup">
+
             Don't have an account?
+
             <a href="#">
                 Create account
             </a>
+
         </p>
 
-    </div>
+    </main>
 
 </body>
-</html>
-```
+    </html>
