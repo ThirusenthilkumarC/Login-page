@@ -4,538 +4,479 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Nova — Login</title>
+    <title>Nova — Modern Login</title>
+
+    <meta
+        name="description"
+        content="Nova is a futuristic glassmorphism login page built with pure HTML and CSS."
+    >
 
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        html,
-        body {
-            width: 100%;
-            min-height: 100%;
+            font-family: "Inter", "Segoe UI", sans-serif;
         }
 
         body {
             min-height: 100vh;
-            font-family: Arial, Helvetica, sans-serif;
-            background:
-                radial-gradient(circle at 15% 20%, rgba(124, 58, 237, 0.18), transparent 30%),
-                radial-gradient(circle at 85% 80%, rgba(6, 182, 212, 0.15), transparent 30%),
-                #050505;
-
-            color: #fff;
             display: flex;
-            align-items: center;
             justify-content: center;
-
+            align-items: center;
             overflow: hidden;
+            background: #050510;
+            color: #fff;
             position: relative;
         }
 
-        /* ================= BACKGROUND GLOW ================= */
-
-        .glow {
+        /* Background Grid */
+        body::before {
+            content: "";
             position: absolute;
-            width: 420px;
-            height: 420px;
-            border-radius: 50%;
-            filter: blur(130px);
-            opacity: 0.25;
-            pointer-events: none;
-
-            animation: float 9s ease-in-out infinite;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(130, 80, 255, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 220, 255, 0.07) 1px, transparent 1px);
+            background-size: 45px 45px;
+            mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
         }
 
-        .glow-one {
-            background: #7c3aed;
+        /* Glow Effects */
+        .glow {
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.25;
+            animation: floatGlow 8s ease-in-out infinite;
+        }
+
+        .glow.one {
+            background: #8b5cf6;
             top: -180px;
             left: -150px;
         }
 
-        .glow-two {
-            background: #06b6d4;
-            right: -170px;
+        .glow.two {
+            background: #00d9ff;
             bottom: -180px;
-            animation-delay: 2s;
+            right: -150px;
+            animation-delay: -4s;
         }
 
-        /* ================= GRID ================= */
+        @keyframes floatGlow {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
 
-        .grid {
-            position: absolute;
-            inset: 0;
-
-            background-image:
-                linear-gradient(
-                    rgba(255, 255, 255, 0.025) 1px,
-                    transparent 1px
-                ),
-                linear-gradient(
-                    90deg,
-                    rgba(255, 255, 255, 0.025) 1px,
-                    transparent 1px
-                );
-
-            background-size: 50px 50px;
-
-            mask-image: linear-gradient(
-                to bottom,
-                transparent,
-                black 20%,
-                black 80%,
-                transparent
-            );
-
-            pointer-events: none;
+            50% {
+                transform: translate(30px, -25px) scale(1.1);
+            }
         }
 
-        /* ================= PARTICLES ================= */
-
-        .particle {
+        /* Particles */
+        .particles span {
             position: absolute;
-            width: 3px;
-            height: 3px;
-
+            width: 4px;
+            height: 4px;
             background: #fff;
             border-radius: 50%;
-            opacity: 0.5;
-
-            animation: particle 8s linear infinite;
-            pointer-events: none;
+            box-shadow: 0 0 12px #8b5cf6;
+            animation: particleFloat linear infinite;
         }
 
-        .p1 {
-            left: 15%;
+        .particles span:nth-child(1) {
+            left: 10%;
+            top: 20%;
+            animation-duration: 7s;
+        }
+
+        .particles span:nth-child(2) {
+            left: 20%;
             top: 70%;
+            animation-duration: 9s;
         }
 
-        .p2 {
+        .particles span:nth-child(3) {
             left: 80%;
-            top: 30%;
-            animation-delay: 2s;
+            top: 25%;
+            animation-duration: 8s;
         }
 
-        .p3 {
-            left: 50%;
-            top: 15%;
-            animation-delay: 4s;
-        }
-
-        .p4 {
-            left: 30%;
-            top: 30%;
-            animation-delay: 1s;
-        }
-
-        .p5 {
-            left: 65%;
+        .particles span:nth-child(4) {
+            left: 90%;
             top: 75%;
-            animation-delay: 3s;
+            animation-duration: 10s;
         }
 
-        /* ================= LOGIN CARD ================= */
+        .particles span:nth-child(5) {
+            left: 50%;
+            top: 10%;
+            animation-duration: 6s;
+        }
 
+        .particles span:nth-child(6) {
+            left: 65%;
+            top: 85%;
+            animation-duration: 11s;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(0);
+                opacity: 0.2;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+        }
+
+        /* Login Container */
         .login-container {
-            width: 430px;
-            max-width: calc(100% - 30px);
-
-            padding: 45px 40px;
-
-            background: rgba(255, 255, 255, 0.065);
-
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-
-            border: 1px solid rgba(255, 255, 255, 0.13);
-            border-radius: 28px;
-
-            box-shadow:
-                0 30px 100px rgba(0, 0, 0, 0.55),
-                inset 0 1px 0 rgba(255, 255, 255, 0.08);
-
-            position: relative;
-            z-index: 10;
-
-            animation: cardReveal 0.9s ease forwards;
-        }
-
-        .login-container::before {
-            content: "";
-
-            position: absolute;
-            inset: 0;
-
-            border-radius: inherit;
-
-            background: linear-gradient(
-                135deg,
-                rgba(139, 92, 246, 0.08),
-                transparent 40%,
-                rgba(6, 182, 212, 0.06)
-            );
-
-            pointer-events: none;
-        }
-
-        /* ================= LOGO ================= */
-
-        .logo {
-            position: relative;
-
-            text-align: center;
-
-            font-size: 28px;
-            font-weight: 800;
-            letter-spacing: 5px;
-
-            margin-bottom: 34px;
-        }
-
-        .logo span {
-            color: #8b5cf6;
-
-            text-shadow:
-                0 0 20px rgba(139, 92, 246, 0.6);
-        }
-
-        /* ================= TITLE ================= */
-
-        .title {
-            position: relative;
-
-            text-align: center;
-
-            font-size: 32px;
-            line-height: 1.2;
-
-            margin-bottom: 9px;
-        }
-
-        .subtitle {
-            position: relative;
-
-            text-align: center;
-
-            color: #8b8b8b;
-            font-size: 14px;
-
-            margin-bottom: 32px;
-        }
-
-        /* ================= INPUT ================= */
-
-        .input-group {
-            position: relative;
-            margin-bottom: 18px;
-        }
-
-        .input-group input {
             width: 100%;
-
-            padding: 16px 18px;
-
-            background: rgba(255, 255, 255, 0.045);
-
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 14px;
-
-            color: #fff;
-            font-size: 15px;
-
-            outline: none;
-
-            transition:
-                border 0.3s ease,
-                box-shadow 0.3s ease,
-                background 0.3s ease,
-                transform 0.3s ease;
-        }
-
-        .input-group input::placeholder {
-            color: #707070;
-        }
-
-        .input-group input:hover {
-            background: rgba(255, 255, 255, 0.065);
-        }
-
-        .input-group input:focus {
-            border-color: #8b5cf6;
-
-            background: rgba(139, 92, 246, 0.055);
-
-            box-shadow:
-                0 0 0 3px rgba(139, 92, 246, 0.12),
-                0 0 25px rgba(139, 92, 246, 0.08);
-        }
-
-        /* ================= OPTIONS ================= */
-
-        .options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            font-size: 13px;
-
-            margin: 4px 0 25px;
-        }
-
-        .remember {
-            display: flex;
-            align-items: center;
-
-            gap: 8px;
-
-            color: #999;
-            cursor: pointer;
-        }
-
-        .remember input {
-            accent-color: #8b5cf6;
-            cursor: pointer;
-        }
-
-        .forgot {
-            color: #a78bfa;
-
-            text-decoration: none;
-
-            transition: 0.3s;
-        }
-
-        .forgot:hover {
-            color: #c4b5fd;
-        }
-
-        /* ================= LOGIN BUTTON ================= */
-
-        .login-btn {
-            width: 100%;
-
-            padding: 16px;
-
-            border: none;
-            border-radius: 14px;
-
-            background:
-                linear-gradient(
-                    100deg,
-                    #7c3aed,
-                    #8b5cf6,
-                    #06b6d4
-                );
-
-            background-size: 200% 100%;
-
-            color: #fff;
-
-            font-size: 15px;
-            font-weight: 700;
-
-            cursor: pointer;
-
-            transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease,
-                background-position 0.5s ease;
-        }
-
-        .login-btn:hover {
-            transform: translateY(-3px);
-
-            background-position: 100% 0;
-
-            box-shadow:
-                0 15px 40px rgba(124, 58, 237, 0.35);
-        }
-
-        .login-btn:active {
-            transform: translateY(-1px);
-        }
-
-        /* ================= DIVIDER ================= */
-
-        .divider {
-            display: flex;
-            align-items: center;
-
-            gap: 12px;
-
-            color: #666;
-            font-size: 11px;
-            letter-spacing: 1px;
-
-            margin: 28px 0;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: "";
-
-            height: 1px;
-            flex: 1;
-
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        /* ================= SOCIAL ================= */
-
-        .social {
-            display: grid;
-
-            grid-template-columns: 1fr 1fr;
-
-            gap: 12px;
-        }
-
-        .social button {
-            padding: 13px;
-
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-
-            background: rgba(255, 255, 255, 0.035);
-
-            color: #fff;
-
-            font-size: 14px;
-
-            cursor: pointer;
-
-            transition:
-                background 0.3s ease,
-                transform 0.3s ease,
-                border 0.3s ease;
-        }
-
-        .social button:hover {
-            background: rgba(255, 255, 255, 0.09);
-
-            border-color: rgba(255, 255, 255, 0.2);
-
-            transform: translateY(-2px);
-        }
-
-        /* ================= SIGNUP ================= */
-
-        .signup {
+            max-width: 430px;
+            padding: 20px;
             position: relative;
-
-            text-align: center;
-
-            margin-top: 28px;
-
-            color: #777;
-            font-size: 14px;
+            z-index: 5;
+            animation: cardEnter 0.9s ease forwards;
         }
 
-        .signup a {
-            color: #a78bfa;
-
-            text-decoration: none;
-
-            font-weight: 600;
-
-            transition: 0.3s;
-        }
-
-        .signup a:hover {
-            color: #c4b5fd;
-        }
-
-        /* ================= ANIMATIONS ================= */
-
-        @keyframes cardReveal {
+        @keyframes cardEnter {
             from {
                 opacity: 0;
-                transform: translateY(40px) scale(0.96);
-                filter: blur(8px);
+                transform: translateY(35px) scale(0.96);
             }
 
             to {
                 opacity: 1;
                 transform: translateY(0) scale(1);
-                filter: blur(0);
             }
         }
 
-        @keyframes float {
-            0%,
-            100% {
-                transform: translate(0, 0);
-            }
+        /* Login Card */
+        .login-card {
+            position: relative;
+            padding: 42px 38px;
+            border-radius: 28px;
 
-            50% {
-                transform: translate(80px, -60px);
-            }
+            background: rgba(255, 255, 255, 0.055);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.55),
+                inset 0 1px rgba(255, 255, 255, 0.08);
+
+            overflow: hidden;
         }
 
-        @keyframes particle {
-            0% {
-                transform: translateY(0);
-                opacity: 0;
-            }
-
-            50% {
-                opacity: 0.7;
-            }
-
-            100% {
-                transform: translateY(-180px);
-                opacity: 0;
-            }
+        .login-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 15%;
+            width: 70%;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                #a855f7,
+                #00d9ff,
+                transparent
+            );
         }
 
-        /* ================= MOBILE ================= */
+        /* Logo */
+        .logo {
+            width: 62px;
+            height: 62px;
+            margin: 0 auto 20px;
 
-        @media (max-width: 500px) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
+            border-radius: 18px;
+
+            background: linear-gradient(
+                135deg,
+                #8b5cf6,
+                #00d9ff
+            );
+
+            font-size: 28px;
+            font-weight: 900;
+
+            box-shadow:
+                0 0 35px rgba(139, 92, 246, 0.35);
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -1px;
+
+            background: linear-gradient(
+                90deg,
+                #fff,
+                #c4b5fd,
+                #67e8f9
+            );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            margin-top: 8px;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #d1d5db;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8b5cf6;
+            font-size: 16px;
+        }
+
+        .form-group input {
+            width: 100%;
+            height: 52px;
+            padding: 0 16px 0 45px;
+
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+            background: rgba(0, 0, 0, 0.22);
+            color: white;
+
+            outline: none;
+            transition: 0.3s ease;
+        }
+
+        .form-group input::placeholder {
+            color: #6b7280;
+        }
+
+        .form-group input:focus {
+            border-color: #8b5cf6;
+
+            box-shadow:
+                0 0 0 3px rgba(139, 92, 246, 0.12),
+                0 0 20px rgba(139, 92, 246, 0.12);
+        }
+
+        /* Options */
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 5px 0 22px;
+            font-size: 13px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #9ca3af;
+        }
+
+        .remember input {
+            accent-color: #8b5cf6;
+        }
+
+        .forgot {
+            color: #a78bfa;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .forgot:hover {
+            color: #67e8f9;
+        }
+
+        /* Sign In Button */
+        .signin-btn {
+            width: 100%;
+            height: 54px;
+
+            border: none;
+            border-radius: 15px;
+
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            background: linear-gradient(
+                90deg,
+                #7c3aed,
+                #8b5cf6,
+                #06b6d4
+            );
+
+            background-size: 200% auto;
+
+            box-shadow:
+                0 10px 30px rgba(124, 58, 237, 0.3);
+
+            transition: 0.4s ease;
+        }
+
+        .signin-btn:hover {
+            background-position: right center;
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 15px 35px rgba(6, 182, 212, 0.25);
+        }
+
+        /* Divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 25px 0;
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Social Buttons */
+        .social-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .social-btn {
+            height: 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            border-radius: 13px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+            background: rgba(255, 255, 255, 0.04);
+
+            color: #e5e7eb;
+            font-size: 13px;
+            font-weight: 600;
+
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.09);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Signup */
+        .signup {
+            text-align: center;
+            margin-top: 28px;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        .signup a {
+            color: #a78bfa;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .signup a:hover {
+            color: #67e8f9;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 18px;
+            color: #4b5563;
+            font-size: 11px;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
             body {
-                padding: 15px 0;
                 overflow-y: auto;
+                padding: 20px 0;
             }
 
             .login-container {
+                padding: 15px;
+            }
+
+            .login-card {
                 padding: 35px 24px;
                 border-radius: 24px;
             }
 
-            .logo {
-                font-size: 25px;
-                margin-bottom: 28px;
+            .header h1 {
+                font-size: 28px;
             }
 
-            .title {
-                font-size: 27px;
-            }
-
-            .subtitle {
-                font-size: 13px;
-                margin-bottom: 27px;
-            }
-
-            .options {
-                font-size: 12px;
-            }
-
-            .social {
+            .social-buttons {
                 grid-template-columns: 1fr;
             }
         }
 
-        /* ================= REDUCED MOTION ================= */
-
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation: none !important;
-                transition: none !important;
+        @media (max-height: 700px) {
+            body {
+                align-items: flex-start;
+                padding-top: 25px;
+                overflow-y: auto;
             }
         }
     </style>
@@ -543,124 +484,124 @@
 
 <body>
 
-    <!-- Background -->
+    <!-- Background Glow -->
+    <div class="glow one"></div>
+    <div class="glow two"></div>
 
-    <div class="glow glow-one"></div>
-    <div class="glow glow-two"></div>
+    <!-- Floating Particles -->
+    <div class="particles">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
 
-    <div class="grid"></div>
-
-    <div class="particle p1"></div>
-    <div class="particle p2"></div>
-    <div class="particle p3"></div>
-    <div class="particle p4"></div>
-    <div class="particle p5"></div>
-
-
-    <!-- Login Card -->
-
+    <!-- Login -->
     <main class="login-container">
 
-        <div class="logo">
-            N<span>O</span>VA
-        </div>
+        <section class="login-card">
 
-        <h1 class="title">
-            Welcome Back
-        </h1>
-
-        <p class="subtitle">
-            Sign in to continue your journey
-        </p>
-
-
-        <form>
-
-            <div class="input-group">
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email address"
-                    autocomplete="email"
-                    required
-                >
+            <div class="logo">
+                ✦
             </div>
 
-
-            <div class="input-group">
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    autocomplete="current-password"
-                    required
-                >
+            <div class="header">
+                <h1>Welcome to Nova</h1>
+                <p>Sign in to continue your journey.</p>
             </div>
 
+            <form>
 
-            <div class="options">
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email Address</label>
 
-                <label class="remember">
+                    <div class="input-wrapper">
+                        <span class="input-icon">✉</span>
 
-                    <input
-                        type="checkbox"
-                        name="remember"
-                    >
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="you@example.com"
+                            required
+                        >
+                    </div>
+                </div>
 
-                    <span>Remember me</span>
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
 
-                </label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🔒</span>
 
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            required
+                        >
+                    </div>
+                </div>
 
-                <a
-                    href="#"
-                    class="forgot"
-                >
-                    Forgot password?
-                </a>
+                <!-- Options -->
+                <div class="options">
+
+                    <label class="remember">
+                        <input type="checkbox">
+                        Remember me
+                    </label>
+
+                    <a href="#" class="forgot">
+                        Forgot password?
+                    </a>
+
+                </div>
+
+                <!-- Sign In -->
+                <button type="submit" class="signin-btn">
+                    Sign In →
+                </button>
+
+            </form>
+
+            <!-- Divider -->
+            <div class="divider">
+                OR CONTINUE WITH
+            </div>
+
+            <!-- Social Login -->
+            <div class="social-buttons">
+
+                <button class="social-btn" type="button">
+                    <span>G</span>
+                    Google
+                </button>
+
+                <button class="social-btn" type="button">
+                    <span>◉</span>
+                    GitHub
+                </button>
 
             </div>
 
+            <!-- Signup -->
+            <div class="signup">
+                Don't have an account?
+                <a href="#">Create account</a>
+            </div>
 
-            <button
-                class="login-btn"
-                type="submit"
-            >
-                Sign In →
-            </button>
+        </section>
 
-        </form>
-
-
-        <div class="divider">
-            OR CONTINUE WITH
+        <div class="footer">
+            © 2026 Nova. Built with HTML & CSS.
         </div>
-
-
-        <div class="social">
-
-            <button type="button">
-                Google
-            </button>
-
-            <button type="button">
-                GitHub
-            </button>
-
-        </div>
-
-
-        <p class="signup">
-
-            Don't have an account?
-
-            <a href="#">
-                Create account
-            </a>
-
-        </p>
 
     </main>
 
 </body>
-    </html>
+</html>
