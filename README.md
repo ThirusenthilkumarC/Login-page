@@ -1,10 +1,3 @@
-<div align="center">
-
-# 🌌 NOVA
-
-### ✨ A New Dimension of Authentication UI
-
-**Where futuristic design meets simplicity.**
 
 A modern, responsive login page featuring stunning glassmorphism, neon gradients, animated backgrounds, and a premium user interface — crafted using pure HTML & CSS.
 
