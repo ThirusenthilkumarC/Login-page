@@ -1,607 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Nova — Modern Login</title>
-
-    <meta
-        name="description"
-        content="Nova is a futuristic glassmorphism login page built with pure HTML and CSS."
-    >
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Inter", "Segoe UI", sans-serif;
-        }
-
-        body {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            background: #050510;
-            color: #fff;
-            position: relative;
-        }
-
-        /* Background Grid */
-        body::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(130, 80, 255, 0.07) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 220, 255, 0.07) 1px, transparent 1px);
-            background-size: 45px 45px;
-            mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
-        }
-
-        /* Glow Effects */
-        .glow {
-            position: absolute;
-            width: 450px;
-            height: 450px;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.25;
-            animation: floatGlow 8s ease-in-out infinite;
-        }
-
-        .glow.one {
-            background: #8b5cf6;
-            top: -180px;
-            left: -150px;
-        }
-
-        .glow.two {
-            background: #00d9ff;
-            bottom: -180px;
-            right: -150px;
-            animation-delay: -4s;
-        }
-
-        @keyframes floatGlow {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-            }
-
-            50% {
-                transform: translate(30px, -25px) scale(1.1);
-            }
-        }
-
-        /* Particles */
-        .particles span {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #fff;
-            border-radius: 50%;
-            box-shadow: 0 0 12px #8b5cf6;
-            animation: particleFloat linear infinite;
-        }
-
-        .particles span:nth-child(1) {
-            left: 10%;
-            top: 20%;
-            animation-duration: 7s;
-        }
-
-        .particles span:nth-child(2) {
-            left: 20%;
-            top: 70%;
-            animation-duration: 9s;
-        }
-
-        .particles span:nth-child(3) {
-            left: 80%;
-            top: 25%;
-            animation-duration: 8s;
-        }
-
-        .particles span:nth-child(4) {
-            left: 90%;
-            top: 75%;
-            animation-duration: 10s;
-        }
-
-        .particles span:nth-child(5) {
-            left: 50%;
-            top: 10%;
-            animation-duration: 6s;
-        }
-
-        .particles span:nth-child(6) {
-            left: 65%;
-            top: 85%;
-            animation-duration: 11s;
-        }
-
-        @keyframes particleFloat {
-            0% {
-                transform: translateY(0);
-                opacity: 0.2;
-            }
-
-            50% {
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(-100px);
-                opacity: 0;
-            }
-        }
-
-        /* Login Container */
-        .login-container {
-            width: 100%;
-            max-width: 430px;
-            padding: 20px;
-            position: relative;
-            z-index: 5;
-            animation: cardEnter 0.9s ease forwards;
-        }
-
-        @keyframes cardEnter {
-            from {
-                opacity: 0;
-                transform: translateY(35px) scale(0.96);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        /* Login Card */
-        .login-card {
-            position: relative;
-            padding: 42px 38px;
-            border-radius: 28px;
-
-            background: rgba(255, 255, 255, 0.055);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-
-            box-shadow:
-                0 30px 80px rgba(0, 0, 0, 0.55),
-                inset 0 1px rgba(255, 255, 255, 0.08);
-
-            overflow: hidden;
-        }
-
-        .login-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 15%;
-            width: 70%;
-            height: 1px;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                #a855f7,
-                #00d9ff,
-                transparent
-            );
-        }
-
-        /* Logo */
-        .logo {
-            width: 62px;
-            height: 62px;
-            margin: 0 auto 20px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 18px;
-
-            background: linear-gradient(
-                135deg,
-                #8b5cf6,
-                #00d9ff
-            );
-
-            font-size: 28px;
-            font-weight: 900;
-
-            box-shadow:
-                0 0 35px rgba(139, 92, 246, 0.35);
-        }
-
-        /* Header */
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .header h1 {
-            font-size: 32px;
-            font-weight: 800;
-            letter-spacing: -1px;
-
-            background: linear-gradient(
-                90deg,
-                #fff,
-                #c4b5fd,
-                #67e8f9
-            );
-
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .header p {
-            margin-top: 8px;
-            color: #9ca3af;
-            font-size: 14px;
-        }
-
-        /* Form */
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #d1d5db;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .input-wrapper {
-            position: relative;
-        }
-
-        .input-icon {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #8b5cf6;
-            font-size: 16px;
-        }
-
-        .form-group input {
-            width: 100%;
-            height: 52px;
-            padding: 0 16px 0 45px;
-
-            border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-
-            background: rgba(0, 0, 0, 0.22);
-            color: white;
-
-            outline: none;
-            transition: 0.3s ease;
-        }
-
-        .form-group input::placeholder {
-            color: #6b7280;
-        }
-
-        .form-group input:focus {
-            border-color: #8b5cf6;
-
-            box-shadow:
-                0 0 0 3px rgba(139, 92, 246, 0.12),
-                0 0 20px rgba(139, 92, 246, 0.12);
-        }
-
-        /* Options */
-        .options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 5px 0 22px;
-            font-size: 13px;
-        }
-
-        .remember {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #9ca3af;
-        }
-
-        .remember input {
-            accent-color: #8b5cf6;
-        }
-
-        .forgot {
-            color: #a78bfa;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .forgot:hover {
-            color: #67e8f9;
-        }
-
-        /* Sign In Button */
-        .signin-btn {
-            width: 100%;
-            height: 54px;
-
-            border: none;
-            border-radius: 15px;
-
-            color: white;
-            font-size: 15px;
-            font-weight: 700;
-
-            cursor: pointer;
-
-            background: linear-gradient(
-                90deg,
-                #7c3aed,
-                #8b5cf6,
-                #06b6d4
-            );
-
-            background-size: 200% auto;
-
-            box-shadow:
-                0 10px 30px rgba(124, 58, 237, 0.3);
-
-            transition: 0.4s ease;
-        }
-
-        .signin-btn:hover {
-            background-position: right center;
-            transform: translateY(-2px);
-
-            box-shadow:
-                0 15px 35px rgba(6, 182, 212, 0.25);
-        }
-
-        /* Divider */
-        .divider {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin: 25px 0;
-            color: #6b7280;
-            font-size: 12px;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        /* Social Buttons */
-        .social-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        .social-btn {
-            height: 48px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-
-            border-radius: 13px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-
-            background: rgba(255, 255, 255, 0.04);
-
-            color: #e5e7eb;
-            font-size: 13px;
-            font-weight: 600;
-
-            cursor: pointer;
-            transition: 0.3s ease;
-        }
-
-        .social-btn:hover {
-            background: rgba(255, 255, 255, 0.09);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        /* Signup */
-        .signup {
-            text-align: center;
-            margin-top: 28px;
-            color: #6b7280;
-            font-size: 13px;
-        }
-
-        .signup a {
-            color: #a78bfa;
-            text-decoration: none;
-            font-weight: 700;
-        }
-
-        .signup a:hover {
-            color: #67e8f9;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            margin-top: 18px;
-            color: #4b5563;
-            font-size: 11px;
-        }
-
-        /* Responsive */
-        @media (max-width: 480px) {
-            body {
-                overflow-y: auto;
-                padding: 20px 0;
-            }
-
-            .login-container {
-                padding: 15px;
-            }
-
-            .login-card {
-                padding: 35px 24px;
-                border-radius: 24px;
-            }
-
-            .header h1 {
-                font-size: 28px;
-            }
-
-            .social-buttons {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-height: 700px) {
-            body {
-                align-items: flex-start;
-                padding-top: 25px;
-                overflow-y: auto;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090817" />
+  <meta name="description" content="Nova — a futuristic login page built with HTML and CSS." />
+  <title>Nova — Modern Login Page</title>
+  <style>
+    :root {
+      --bg: #090817;
+      --panel: rgba(19, 20, 45, .72);
+      --text: #f5f4ff;
+      --muted: #aaa9c8;
+      --purple: #a855f7;
+      --cyan: #42e8f5;
+      --border: rgba(255,255,255,.13);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 15% 15%, rgba(123, 58, 237, .23), transparent 34%),
+        radial-gradient(ellipse at 88% 40%, rgba(25, 206, 226, .14), transparent 32%),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .17;
+      background-image: linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1100px, calc(100% - 36px)); margin-inline: auto; }
+    .nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 24px 0; gap: 20px;
+    }
+    .brand { font-size: 1.35rem; font-weight: 850; letter-spacing: .12em; }
+    .brand span { color: var(--cyan); text-shadow: 0 0 22px rgba(66,232,245,.6); }
+    .nav-links { display: flex; gap: 22px; color: var(--muted); font-size: .92rem; }
+    .nav-links a:hover { color: white; }
+    .hero { text-align: center; padding: 62px 0 46px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px;
+      border: 1px solid var(--border); background: rgba(255,255,255,.04);
+      color: #d8d4ff; padding: 7px 13px; border-radius: 999px;
+      font-size: .8rem; letter-spacing: .08em; text-transform: uppercase;
+    }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 12px var(--cyan); }
+    h1 { margin: 20px 0 12px; font-size: clamp(2.8rem, 8vw, 5.8rem); line-height: 1.02; letter-spacing: -.065em; }
+    .gradient-text {
+      background: linear-gradient(100deg, #c084fc 10%, #7c9cff 48%, #4debf4 90%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero p { color: var(--muted); max-width: 690px; margin: 0 auto; font-size: clamp(1rem, 2vw, 1.15rem); }
+    .badges { display: flex; justify-content: center; flex-wrap: wrap; gap: 9px; margin: 24px 0 0; }
+    .badge { border: 1px solid var(--border); background: rgba(255,255,255,.045); padding: 6px 11px; border-radius: 8px; font-size: .78rem; color: #e6e4ff; }
+    .preview-wrap { max-width: 890px; margin: 30px auto 0; padding: 1px; border-radius: 22px; background: linear-gradient(135deg, rgba(168,85,247,.8), rgba(66,232,245,.45), transparent 75%); box-shadow: 0 25px 100px rgba(82,52,190,.2); }
+    .preview {
+      min-height: 330px; border-radius: 21px; padding: 25px;
+      display: grid; place-items: center; position: relative; overflow: hidden;
+      background: radial-gradient(circle at 20% 15%, rgba(168,85,247,.22), transparent 38%), radial-gradient(circle at 85% 75%, rgba(66,232,245,.13), transparent 34%), #0c0b1c;
+    }
+    .window-dots { position: absolute; top: 18px; left: 20px; display: flex; gap: 7px; }
+    .window-dots i { display: block; width: 8px; height: 8px; border-radius: 50%; background: #746f9b; }
+    .login-card {
+      width: min(100%, 340px); padding: 27px; border: 1px solid rgba(255,255,255,.17);
+      border-radius: 18px; background: rgba(21, 20, 43, .7); backdrop-filter: blur(18px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.32); animation: float 5s ease-in-out infinite;
+    }
+    .orb { width: 42px; height: 42px; border-radius: 14px; margin: 0 auto 12px; background: linear-gradient(135deg, var(--purple), var(--cyan)); box-shadow: 0 0 28px rgba(168,85,247,.35); }
+    .login-card h3 { text-align: center; margin: 0; font-size: 1.25rem; }
+    .login-card .sub { text-align: center; color: var(--muted); font-size: .75rem; margin: 4px 0 18px; }
+    .fake-label { color: #d6d3ef; font-size: .72rem; display: block; margin: 11px 0 5px; }
+    .fake-input { height: 34px; border: 1px solid rgba(255,255,255,.13); border-radius: 7px; background: rgba(255,255,255,.04); }
+    .fake-button { margin-top: 17px; text-align: center; padding: 9px; border-radius: 8px; font-size: .8rem; font-weight: 750; background: linear-gradient(90deg, #9349ef, #3bcddd); color: #090817; }
+    .section { padding: 56px 0; }
+    .section-head { text-align: center; margin-bottom: 28px; }
+    .section-head h2 { font-size: clamp(1.7rem, 4vw, 2.5rem); letter-spacing: -.04em; margin: 0 0 7px; }
+    .section-head p { color: var(--muted); margin: 0 auto; max-width: 620px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .card { border: 1px solid var(--border); border-radius: 16px; padding: 21px; background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018)); }
+    .icon { font-size: 1.55rem; }
+    .card h3 { margin: 9px 0 5px; font-size: 1rem; }
+    .card p { color: var(--muted); margin: 0; font-size: .9rem; }
+    .tech-table { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 13px; border: 1px solid var(--border); }
+    .tech-table th, .tech-table td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .tech-table th { background: rgba(168,85,247,.12); color: #e5ddff; }
+    .tech-table td { color: var(--muted); background: rgba(255,255,255,.02); }
+    .tech-table tr:last-child td { border-bottom: 0; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .step-number { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 10px; color: var(--cyan); background: rgba(66,232,245,.1); border: 1px solid rgba(66,232,245,.2); font-weight: 800; }
+    code, pre { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #080714; border: 1px solid var(--border); border-radius: 10px; padding: 13px; color: #d9d6ff; font-size: .8rem; }
+    .roadmap { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .roadmap div { padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px; color: var(--muted); background: rgba(255,255,255,.025); }
+    .callout { padding: 20px 22px; border: 1px solid rgba(66,232,245,.22); border-radius: 14px; background: rgba(66,232,245,.055); color: #d9faff; }
+    footer { margin-top: 30px; padding: 30px 0 42px; text-align: center; border-top: 1px solid var(--border); color: var(--muted); font-size: .9rem; }
+    footer strong { color: white; }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    @media (max-width: 760px) {
+      .hero { padding-top: 42px; }
+      .nav-links { gap: 12px; font-size: .82rem; }
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .steps { grid-template-columns: 1fr; }
+      .preview { min-height: 300px; padding: 18px; }
+    }
+    @media (max-width: 520px) {
+      .container { width: min(100% - 26px, 1100px); }
+      .nav { align-items: flex-start; }
+      .nav-links { flex-wrap: wrap; justify-content: flex-end; }
+      .grid, .roadmap { grid-template-columns: 1fr; }
+      .hero { padding-top: 32px; }
+      .section { padding: 40px 0; }
+      .tech-table th, .tech-table td { padding: 10px; font-size: .84rem; }
+      .preview { min-height: 285px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
 </head>
-
 <body>
+  <header class="container nav">
+    <a class="brand" href="#top" aria-label="Nova home">N<span>O</span>VA<span>.</span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#features">Features</a>
+      <a href="#tech">Tech Stack</a>
+      <a href="#getting-started">Get Started</a>
+    </nav>
+  </header>
 
-    <!-- Background Glow -->
-    <div class="glow one"></div>
-    <div class="glow two"></div>
+  <main id="top">
+    <section class="container hero">
+      <div class="eyebrow"><span class="dot"></span> Futuristic authentication UI</div>
+      <h1>Meet <span class="gradient-text">Nova.</span></h1>
+      <p>A modern login experience where glassmorphism meets neon light. Lightweight, responsive, and built with pure HTML &amp; CSS.</p>
+      <div class="badges" aria-label="Project tags">
+        <span class="badge">🌐 HTML5</span>
+        <span class="badge">🎨 CSS3</span>
+        <span class="badge">📱 Responsive</span>
+        <span class="badge">✨ CSS Animations</span>
+        <span class="badge">🟢 Completed UI</span>
+      </div>
 
-    <!-- Floating Particles -->
-    <div class="particles">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-
-    <!-- Login -->
-    <main class="login-container">
-
-        <section class="login-card">
-
-            <div class="logo">
-                ✦
-            </div>
-
-            <div class="header">
-                <h1>Welcome to Nova</h1>
-                <p>Sign in to continue your journey.</p>
-            </div>
-
-            <form>
-
-                <!-- Email -->
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-
-                    <div class="input-wrapper">
-                        <span class="input-icon">✉</span>
-
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="you@example.com"
-                            required
-                        >
-                    </div>
-                </div>
-
-                <!-- Password -->
-                <div class="form-group">
-                    <label for="password">Password</label>
-
-                    <div class="input-wrapper">
-                        <span class="input-icon">🔒</span>
-
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            placeholder="Enter your password"
-                            required
-                        >
-                    </div>
-                </div>
-
-                <!-- Options -->
-                <div class="options">
-
-                    <label class="remember">
-                        <input type="checkbox">
-                        Remember me
-                    </label>
-
-                    <a href="#" class="forgot">
-                        Forgot password?
-                    </a>
-
-                </div>
-
-                <!-- Sign In -->
-                <button type="submit" class="signin-btn">
-                    Sign In →
-                </button>
-
-            </form>
-
-            <!-- Divider -->
-            <div class="divider">
-                OR CONTINUE WITH
-            </div>
-
-            <!-- Social Login -->
-            <div class="social-buttons">
-
-                <button class="social-btn" type="button">
-                    <span>G</span>
-                    Google
-                </button>
-
-                <button class="social-btn" type="button">
-                    <span>◉</span>
-                    GitHub
-                </button>
-
-            </div>
-
-            <!-- Signup -->
-            <div class="signup">
-                Don't have an account?
-                <a href="#">Create account</a>
-            </div>
-
-        </section>
-
-        <div class="footer">
-            © 2026 Nova. Built with HTML & CSS.
+      <div class="preview-wrap">
+        <div class="preview" aria-label="Illustrative Nova login page preview">
+          <div class="window-dots"><i></i><i></i><i></i></div>
+          <div class="login-card">
+            <div class="orb"></div>
+            <h3>Welcome back</h3>
+            <p class="sub">Sign in to continue to Nova</p>
+            <label class="fake-label">Email address</label>
+            <div class="fake-input"></div>
+            <label class="fake-label">Password</label>
+            <div class="fake-input"></div>
+            <div class="fake-button">SIGN IN&nbsp; →</div>
+          </div>
         </div>
+      </div>
+      <p style="font-size:.78rem;margin-top:12px;">Illustrative preview of the visual direction — replace it with a screenshot of your actual login page when available.</p>
+    </section>
 
-    </main>
+    <section class="container section" id="about">
+      <div class="section-head">
+        <h2>🌌 About Nova</h2>
+        <p>Nova turns a simple login screen into a polished digital experience with atmospheric lighting, translucent surfaces, and subtle motion.</p>
+      </div>
+      <div class="callout">✨ <strong>Design philosophy:</strong> Minimal code. Maximum visual impact. Built as a lightweight starting point for UI/UX experiments and portfolio projects.</div>
+    </section>
 
+    <section class="container section" id="features">
+      <div class="section-head">
+        <h2>✨ Features</h2>
+        <p>Designed to look futuristic while keeping the project easy to understand and customize.</p>
+      </div>
+      <div class="grid">
+        <article class="card"><div class="icon">🪟</div><h3>Glassmorphism</h3><p>Translucent panels, soft borders, and layered surfaces.</p></article>
+        <article class="card"><div class="icon">🌈</div><h3>Neon Gradients</h3><p>Purple and cyan accents create a vivid futuristic theme.</p></article>
+        <article class="card"><div class="icon">✨</div><h3>Motion Effects</h3><p>Smooth transitions and gentle floating animations.</p></article>
+        <article class="card"><div class="icon">🔐</div><h3>Login UI</h3><p>Email, password, remember-me, and sign-in interface concepts.</p></article>
+        <article class="card"><div class="icon">📱</div><h3>Responsive Layout</h3><p>Adapts to desktop, laptop, tablet, and mobile screens.</p></article>
+        <article class="card"><div class="icon">⚡</div><h3>Framework-Free</h3><p>Built with HTML and CSS without a frontend framework.</p></article>
+      </div>
+    </section>
+
+    <section class="container section" id="tech">
+      <div class="section-head">
+        <h2>🛠️ Tech Stack</h2>
+        <p>Simple technologies, focused on the interface and visual experience.</p>
+      </div>
+      <table class="tech-table">
+        <thead><tr><th>Technology</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>🌐 HTML5</td><td>Page structure and content</td></tr>
+          <tr><td>🎨 CSS3</td><td>Styling, layout, gradients, and effects</td></tr>
+          <tr><td>✨ CSS Animations</td><td>Motion and transitions</td></tr>
+          <tr><td>📱 Responsive CSS</td><td>Layouts for different screen sizes</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="container section" id="getting-started">
+      <div class="section-head">
+        <h2>🚀 Getting Started</h2>
+        <p>Run your Nova login page locally in a few simple steps.</p>
+      </div>
+      <div class="steps">
+        <article class="card"><span class="step-number">1</span><h3>Clone the repository</h3><p>Replace the placeholder with your GitHub repository URL.</p><pre>git clone https://github.com/your-username/nova-login.git</pre></article>
+        <article class="card"><span class="step-number">2</span><h3>Open the folder</h3><p>Move into the project directory.</p><pre>cd nova-login</pre></article>
+        <article class="card"><span class="step-number">3</span><h3>Launch the page</h3><p>Open <code>index.html</code> in your browser, or use VS Code Live Server.</p><pre>code .</pre></article>
+      </div>
+    </section>
+
+    <section class="container section" id="structure">
+      <div class="section-head">
+        <h2>📂 Project Structure</h2>
+        <p>Keep the core project simple and organized.</p>
+      </div>
+      <pre>Nova-Login/
+├── index.html       # Main login page
+├── screenshot.png   # Actual project screenshot (optional)
+└── README.md        # Project documentation</pre>
+    </section>
+
+    <section class="container section" id="roadmap">
+      <div class="section-head">
+        <h2>🔮 Future Roadmap</h2>
+        <p>Ideas for evolving the visual prototype into a more complete experience.</p>
+      </div>
+      <div class="roadmap">
+        <div>⬜ Show / hide password</div>
+        <div>⬜ Client-side form validation</div>
+        <div>⬜ Registration page</div>
+        <div>⬜ Forgot-password flow</div>
+        <div>⬜ Accessible success and error messages</div>
+        <div>⬜ Google / GitHub OAuth integration</div>
+        <div>⬜ Secure backend authentication</div>
+        <div>⬜ User dashboard and database integration</div>
+      </div>
+      <p style="color:var(--muted);font-size:.86rem;margin-top:14px;">Roadmap items are planned improvements, not features included in the current HTML/CSS prototype.</p>
+    </section>
+
+    <section class="container section" id="contributing">
+      <div class="section-head">
+        <h2>🤝 Contributing</h2>
+        <p>Ideas, suggestions, and improvements are welcome.</p>
+      </div>
+      <div class="card">
+        <pre>git checkout -b feature/new-feature
+git add .
+git commit -m "feat: improve login experience"
+git push origin feature/new-feature</pre>
+        <p style="color:var(--muted);margin-bottom:0;">Then open a Pull Request on GitHub.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="brand">N<span>O</span>VA<span>.</span></div>
+      <p><strong>Design the future. One interface at a time.</strong></p>
+      <p>Made with ❤️ using HTML &amp; CSS</p>
+      <p>Created for learning, experimentation, and portfolio development.</p>
+    </div>
+  </footer>
 </body>
 </html>
