@@ -3,278 +3,281 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#090817" />
-  <meta name="description" content="Nova — a futuristic login page built with HTML and CSS." />
-  <title>Nova — Modern Login Page</title>
+  <meta name="theme-color" content="#080914" />
+  <meta name="description" content="NOVA — a futuristic glassmorphism login experience." />
+  <title>NOVA — A New Dimension of Authentication</title>
   <style>
     :root {
-      --bg: #090817;
-      --panel: rgba(19, 20, 45, .72);
-      --text: #f5f4ff;
-      --muted: #aaa9c8;
+      --bg: #080914;
+      --panel: rgba(19, 21, 43, .72);
+      --line: rgba(255,255,255,.13);
+      --text: #f5f5ff;
+      --muted: #a4a7c4;
       --purple: #a855f7;
-      --cyan: #42e8f5;
-      --border: rgba(255,255,255,.13);
+      --cyan: #22d3ee;
+      --pink: #ec4899;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
-      margin: 0;
-      color: var(--text);
-      background:
-        radial-gradient(ellipse at 15% 15%, rgba(123, 58, 237, .23), transparent 34%),
-        radial-gradient(ellipse at 88% 40%, rgba(25, 206, 226, .14), transparent 32%),
-        var(--bg);
+      margin: 0; min-height: 100vh; color: var(--text);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.65;
+      background:
+        radial-gradient(ellipse at 15% 15%, rgba(126,34,206,.20), transparent 38%),
+        radial-gradient(ellipse at 88% 78%, rgba(6,182,212,.14), transparent 35%),
+        var(--bg);
       overflow-x: hidden;
     }
     body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-      opacity: .17;
-      background-image: linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: -1;
+      background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
       background-size: 48px 48px;
-      mask-image: linear-gradient(to bottom, black, transparent 90%);
+      mask-image: linear-gradient(to bottom, black, transparent 88%);
     }
-    a { color: inherit; text-decoration: none; }
-    .container { width: min(1100px, calc(100% - 36px)); margin-inline: auto; }
-    .nav {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 24px 0; gap: 20px;
-    }
-    .brand { font-size: 1.35rem; font-weight: 850; letter-spacing: .12em; }
-    .brand span { color: var(--cyan); text-shadow: 0 0 22px rgba(66,232,245,.6); }
-    .nav-links { display: flex; gap: 22px; color: var(--muted); font-size: .92rem; }
-    .nav-links a:hover { color: white; }
-    .hero { text-align: center; padding: 62px 0 46px; }
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 9px;
-      border: 1px solid var(--border); background: rgba(255,255,255,.04);
-      color: #d8d4ff; padding: 7px 13px; border-radius: 999px;
-      font-size: .8rem; letter-spacing: .08em; text-transform: uppercase;
-    }
-    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 12px var(--cyan); }
-    h1 { margin: 20px 0 12px; font-size: clamp(2.8rem, 8vw, 5.8rem); line-height: 1.02; letter-spacing: -.065em; }
-    .gradient-text {
-      background: linear-gradient(100deg, #c084fc 10%, #7c9cff 48%, #4debf4 90%);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-    }
-    .hero p { color: var(--muted); max-width: 690px; margin: 0 auto; font-size: clamp(1rem, 2vw, 1.15rem); }
-    .badges { display: flex; justify-content: center; flex-wrap: wrap; gap: 9px; margin: 24px 0 0; }
-    .badge { border: 1px solid var(--border); background: rgba(255,255,255,.045); padding: 6px 11px; border-radius: 8px; font-size: .78rem; color: #e6e4ff; }
-    .preview-wrap { max-width: 890px; margin: 30px auto 0; padding: 1px; border-radius: 22px; background: linear-gradient(135deg, rgba(168,85,247,.8), rgba(66,232,245,.45), transparent 75%); box-shadow: 0 25px 100px rgba(82,52,190,.2); }
-    .preview {
-      min-height: 330px; border-radius: 21px; padding: 25px;
-      display: grid; place-items: center; position: relative; overflow: hidden;
-      background: radial-gradient(circle at 20% 15%, rgba(168,85,247,.22), transparent 38%), radial-gradient(circle at 85% 75%, rgba(66,232,245,.13), transparent 34%), #0c0b1c;
-    }
-    .window-dots { position: absolute; top: 18px; left: 20px; display: flex; gap: 7px; }
-    .window-dots i { display: block; width: 8px; height: 8px; border-radius: 50%; background: #746f9b; }
-    .login-card {
-      width: min(100%, 340px); padding: 27px; border: 1px solid rgba(255,255,255,.17);
-      border-radius: 18px; background: rgba(21, 20, 43, .7); backdrop-filter: blur(18px);
-      box-shadow: 0 20px 60px rgba(0,0,0,.32); animation: float 5s ease-in-out infinite;
-    }
-    .orb { width: 42px; height: 42px; border-radius: 14px; margin: 0 auto 12px; background: linear-gradient(135deg, var(--purple), var(--cyan)); box-shadow: 0 0 28px rgba(168,85,247,.35); }
-    .login-card h3 { text-align: center; margin: 0; font-size: 1.25rem; }
-    .login-card .sub { text-align: center; color: var(--muted); font-size: .75rem; margin: 4px 0 18px; }
-    .fake-label { color: #d6d3ef; font-size: .72rem; display: block; margin: 11px 0 5px; }
-    .fake-input { height: 34px; border: 1px solid rgba(255,255,255,.13); border-radius: 7px; background: rgba(255,255,255,.04); }
-    .fake-button { margin-top: 17px; text-align: center; padding: 9px; border-radius: 8px; font-size: .8rem; font-weight: 750; background: linear-gradient(90deg, #9349ef, #3bcddd); color: #090817; }
-    .section { padding: 56px 0; }
-    .section-head { text-align: center; margin-bottom: 28px; }
-    .section-head h2 { font-size: clamp(1.7rem, 4vw, 2.5rem); letter-spacing: -.04em; margin: 0 0 7px; }
-    .section-head p { color: var(--muted); margin: 0 auto; max-width: 620px; }
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-    .card { border: 1px solid var(--border); border-radius: 16px; padding: 21px; background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018)); }
-    .icon { font-size: 1.55rem; }
-    .card h3 { margin: 9px 0 5px; font-size: 1rem; }
-    .card p { color: var(--muted); margin: 0; font-size: .9rem; }
-    .tech-table { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 13px; border: 1px solid var(--border); }
-    .tech-table th, .tech-table td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--border); }
-    .tech-table th { background: rgba(168,85,247,.12); color: #e5ddff; }
-    .tech-table td { color: var(--muted); background: rgba(255,255,255,.02); }
-    .tech-table tr:last-child td { border-bottom: 0; }
-    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-    .step-number { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 10px; color: var(--cyan); background: rgba(66,232,245,.1); border: 1px solid rgba(66,232,245,.2); font-weight: 800; }
-    code, pre { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
-    pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #080714; border: 1px solid var(--border); border-radius: 10px; padding: 13px; color: #d9d6ff; font-size: .8rem; }
-    .roadmap { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .roadmap div { padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px; color: var(--muted); background: rgba(255,255,255,.025); }
-    .callout { padding: 20px 22px; border: 1px solid rgba(66,232,245,.22); border-radius: 14px; background: rgba(66,232,245,.055); color: #d9faff; }
-    footer { margin-top: 30px; padding: 30px 0 42px; text-align: center; border-top: 1px solid var(--border); color: var(--muted); font-size: .9rem; }
-    footer strong { color: white; }
+    #particles { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
+    .orb { position: fixed; width: 260px; height: 260px; border-radius: 50%; filter: blur(80px); opacity: .2; pointer-events: none; z-index: -1; animation: drift 12s ease-in-out infinite alternate; }
+    .orb.one { background: var(--purple); top: 8%; left: -100px; }
+    .orb.two { background: var(--cyan); right: -100px; bottom: 4%; animation-delay: -4s; }
+    @keyframes drift { to { transform: translate(70px, 35px) scale(1.18); } }
+    @keyframes rise { from { opacity: 0; transform: translateY(22px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(168,85,247,.0); } 50% { box-shadow: 0 0 22px 2px rgba(168,85,247,.2); } }
     @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-    @media (max-width: 760px) {
-      .hero { padding-top: 42px; }
-      .nav-links { gap: 12px; font-size: .82rem; }
-      .grid { grid-template-columns: repeat(2, 1fr); }
-      .steps { grid-template-columns: 1fr; }
-      .preview { min-height: 300px; padding: 18px; }
+    .topbar { width: min(1120px, calc(100% - 40px)); margin: 0 auto; padding: 24px 0; display:flex; align-items:center; justify-content:space-between; }
+    .brand { display:flex; gap:11px; align-items:center; font-weight:850; letter-spacing:.16em; }
+    .brand-mark { width:34px; height:34px; display:grid; place-items:center; border:1px solid rgba(168,85,247,.7); border-radius:11px; color:#fff; background:linear-gradient(135deg,rgba(168,85,247,.4),rgba(34,211,238,.16)); box-shadow:0 0 24px rgba(168,85,247,.2); font-size:18px; }
+    .top-note { color:var(--muted); font-size:12px; letter-spacing:.14em; text-transform:uppercase; }
+    main { min-height: calc(100vh - 84px); display:grid; place-items:center; padding: 28px 20px 60px; }
+    .layout { width:min(100%, 980px); display:grid; grid-template-columns: 1fr 420px; align-items:center; gap: clamp(28px, 6vw, 76px); }
+    .intro { animation: rise .8s ease both; }
+    .eyebrow { display:inline-flex; align-items:center; gap:9px; color:#d8b4fe; border:1px solid rgba(168,85,247,.3); border-radius:99px; padding:8px 12px; background:rgba(168,85,247,.08); font-size:11px; font-weight:750; letter-spacing:.13em; text-transform:uppercase; }
+    .live-dot { width:7px; height:7px; border-radius:50%; background:#4ade80; box-shadow:0 0 10px #4ade80; }
+    h1 { font-size:clamp(42px, 6vw, 68px); line-height:.98; letter-spacing:-.055em; margin:22px 0 18px; }
+    .gradient-text { background:linear-gradient(100deg,#fff 10%,#c084fc 48%,#67e8f9 95%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .intro p { max-width:430px; color:var(--muted); font-size:15px; line-height:1.8; }
+    .highlights { display:flex; gap:10px; flex-wrap:wrap; margin-top:28px; }
+    .chip { border:1px solid var(--line); background:rgba(255,255,255,.035); border-radius:10px; padding:9px 11px; color:#d8daf0; font-size:12px; }
+    .mini-orbit { position:relative; width:190px; height:100px; margin-top:30px; opacity:.8; }
+    .mini-orbit::before, .mini-orbit::after { content:""; position:absolute; left:10px; top:10px; width:125px; height:55px; border:1px solid rgba(168,85,247,.55); border-radius:50%; transform:rotate(-25deg); }
+    .mini-orbit::after { border-color:rgba(34,211,238,.55); transform:rotate(25deg); }
+    .orbit-core { position:absolute; left:66px; top:30px; width:20px; height:20px; border-radius:50%; background:linear-gradient(135deg,var(--purple),var(--cyan)); box-shadow:0 0 24px var(--purple); animation:float 3s ease-in-out infinite; }
+    .card-wrap { animation:rise .85s .12s ease both; }
+    .card { position:relative; padding:32px; border:1px solid rgba(255,255,255,.16); border-radius:25px; background:linear-gradient(145deg,rgba(30,32,61,.83),rgba(12,14,30,.82)); box-shadow:0 25px 90px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.09); backdrop-filter:blur(24px); overflow:hidden; }
+    .card::before { content:""; position:absolute; inset:0 0 auto; height:1px; background:linear-gradient(90deg,transparent,var(--purple),var(--cyan),transparent); }
+    .card-head { text-align:center; margin-bottom:25px; }
+    .avatar { width:58px; height:58px; display:grid; place-items:center; margin:0 auto 16px; border:1px solid rgba(255,255,255,.18); border-radius:18px; font-size:25px; background:linear-gradient(145deg,rgba(168,85,247,.3),rgba(34,211,238,.12)); box-shadow:0 0 30px rgba(168,85,247,.13); }
+    .card h2 { margin:0; font-size:25px; letter-spacing:-.03em; }
+    .sub { color:var(--muted); margin:8px 0 0; font-size:13px; }
+    .field { margin-top:17px; }
+    label { display:block; font-size:12px; color:#dfe0f5; font-weight:650; margin:0 0 8px 2px; }
+    .input-wrap { position:relative; }
+    .input-icon { position:absolute; top:50%; left:14px; transform:translateY(-50%); color:#9b9fc1; font-size:15px; pointer-events:none; }
+    input[type="email"], input[type="password"], input[type="text"] { width:100%; border:1px solid rgba(255,255,255,.12); outline:none; border-radius:12px; padding:14px 44px 14px 42px; color:var(--text); background:rgba(5,7,19,.48); font:inherit; font-size:13px; transition:border-color .2s, box-shadow .2s, background .2s; }
+    input::placeholder { color:#6f7395; }
+    input:focus { border-color:rgba(168,85,247,.9); box-shadow:0 0 0 3px rgba(168,85,247,.13); background:rgba(5,7,19,.7); }
+    .toggle-pass { position:absolute; right:10px; top:50%; transform:translateY(-50%); border:0; color:#a5a8c6; background:transparent; padding:7px; cursor:pointer; font-size:15px; }
+    .toggle-pass:hover { color:#fff; }
+    .row { display:flex; align-items:center; justify-content:space-between; gap:10px; margin:15px 0 19px; font-size:12px; }
+    .remember { display:flex; align-items:center; gap:8px; color:var(--muted); cursor:pointer; }
+    input[type="checkbox"] { accent-color:var(--purple); }
+    a { color:#c4b5fd; text-decoration:none; }
+    a:hover { color:#fff; }
+    .primary { width:100%; border:0; border-radius:12px; padding:14px 16px; color:white; font:inherit; font-size:13px; font-weight:800; letter-spacing:.035em; cursor:pointer; background:linear-gradient(100deg,#9333ea,#7c3aed 48%,#0891b2); box-shadow:0 10px 28px rgba(124,58,237,.25); transition:transform .2s,filter .2s,box-shadow .2s; }
+    .primary:hover { transform:translateY(-2px); filter:brightness(1.12); box-shadow:0 14px 34px rgba(124,58,237,.35); }
+    .primary:active { transform:translateY(0); }
+    .divider { display:flex; align-items:center; gap:12px; color:#747895; font-size:10px; letter-spacing:.14em; margin:22px 0; }
+    .divider::before,.divider::after { content:""; height:1px; flex:1; background:rgba(255,255,255,.1); }
+    .socials { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .social { display:flex; justify-content:center; align-items:center; gap:9px; border:1px solid rgba(255,255,255,.13); background:rgba(255,255,255,.035); color:#e7e7f7; padding:11px 8px; border-radius:11px; cursor:pointer; font:inherit; font-size:12px; transition:background .2s,border-color .2s,transform .2s; }
+    .social:hover { background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.25); transform:translateY(-1px); }
+    .signup { text-align:center; margin:22px 0 0; font-size:12px; color:var(--muted); }
+    .secure { display:flex; justify-content:center; align-items:center; gap:7px; margin-top:18px; color:#747895; font-size:10px; }
+    .secure span { color:#4ade80; }
+    .toast { position:fixed; left:50%; bottom:24px; transform:translate(-50%,20px); opacity:0; pointer-events:none; padding:13px 18px; border:1px solid rgba(34,211,238,.3); border-radius:12px; background:rgba(15,18,38,.94); box-shadow:0 10px 40px #0005; color:#e8fbff; font-size:13px; z-index:10; transition:.25s; max-width:calc(100% - 32px); text-align:center; }
+    .toast.show { opacity:1; transform:translate(-50%,0); }
+    .footer { text-align:center; padding:0 20px 25px; color:#676b8b; font-size:11px; letter-spacing:.04em; }
+    @media (max-width: 800px) {
+      .layout { grid-template-columns:1fr; max-width:460px; gap:28px; }
+      .intro { text-align:center; }
+      .intro p { margin-inline:auto; }
+      .highlights { justify-content:center; }
+      .mini-orbit { margin:22px auto 0; height:70px; }
+      h1 { font-size:clamp(40px, 11vw, 58px); }
+      main { padding-top:15px; }
     }
-    @media (max-width: 520px) {
-      .container { width: min(100% - 26px, 1100px); }
-      .nav { align-items: flex-start; }
-      .nav-links { flex-wrap: wrap; justify-content: flex-end; }
-      .grid, .roadmap { grid-template-columns: 1fr; }
-      .hero { padding-top: 32px; }
-      .section { padding: 40px 0; }
-      .tech-table th, .tech-table td { padding: 10px; font-size: .84rem; }
-      .preview { min-height: 285px; }
+    @media (max-width: 480px) {
+      .topbar { width:calc(100% - 28px); padding:18px 0; }
+      .top-note { font-size:9px; letter-spacing:.08em; }
+      main { padding:18px 14px 35px; }
+      .card { padding:25px 20px; border-radius:21px; }
+      .intro p { font-size:13px; }
+      .chip { font-size:11px; }
+      .row { font-size:11px; }
     }
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      *,*::before,*::after { scroll-behavior:auto !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
     }
   </style>
 </head>
 <body>
-  <header class="container nav">
-    <a class="brand" href="#top" aria-label="Nova home">N<span>O</span>VA<span>.</span></a>
-    <nav class="nav-links" aria-label="Main navigation">
-      <a href="#features">Features</a>
-      <a href="#tech">Tech Stack</a>
-      <a href="#getting-started">Get Started</a>
-    </nav>
+  <canvas id="particles" aria-hidden="true"></canvas>
+  <div class="orb one" aria-hidden="true"></div>
+  <div class="orb two" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">✦</span><span>N O V A</span></div>
+    <div class="top-note">Next-generation interface</div>
   </header>
 
-  <main id="top">
-    <section class="container hero">
-      <div class="eyebrow"><span class="dot"></span> Futuristic authentication UI</div>
-      <h1>Meet <span class="gradient-text">Nova.</span></h1>
-      <p>A modern login experience where glassmorphism meets neon light. Lightweight, responsive, and built with pure HTML &amp; CSS.</p>
-      <div class="badges" aria-label="Project tags">
-        <span class="badge">🌐 HTML5</span>
-        <span class="badge">🎨 CSS3</span>
-        <span class="badge">📱 Responsive</span>
-        <span class="badge">✨ CSS Animations</span>
-        <span class="badge">🟢 Completed UI</span>
-      </div>
-
-      <div class="preview-wrap">
-        <div class="preview" aria-label="Illustrative Nova login page preview">
-          <div class="window-dots"><i></i><i></i><i></i></div>
-          <div class="login-card">
-            <div class="orb"></div>
-            <h3>Welcome back</h3>
-            <p class="sub">Sign in to continue to Nova</p>
-            <label class="fake-label">Email address</label>
-            <div class="fake-input"></div>
-            <label class="fake-label">Password</label>
-            <div class="fake-input"></div>
-            <div class="fake-button">SIGN IN&nbsp; →</div>
-          </div>
+  <main>
+    <div class="layout">
+      <section class="intro">
+        <div class="eyebrow"><span class="live-dot"></span> FUTURE-READY DESIGN</div>
+        <h1>Enter a<br /><span class="gradient-text">new dimension.</span></h1>
+        <p>Step into a more elegant digital experience. A futuristic authentication interface where glassmorphism, ambient light, and thoughtful interaction come together.</p>
+        <div class="highlights">
+          <span class="chip">✧ Glassmorphism</span>
+          <span class="chip">◈ Neon gradients</span>
+          <span class="chip">⌁ Responsive UI</span>
         </div>
-      </div>
-      <p style="font-size:.78rem;margin-top:12px;">Illustrative preview of the visual direction — replace it with a screenshot of your actual login page when available.</p>
-    </section>
+        <div class="mini-orbit" aria-hidden="true"><span class="orbit-core"></span></div>
+      </section>
 
-    <section class="container section" id="about">
-      <div class="section-head">
-        <h2>🌌 About Nova</h2>
-        <p>Nova turns a simple login screen into a polished digital experience with atmospheric lighting, translucent surfaces, and subtle motion.</p>
-      </div>
-      <div class="callout">✨ <strong>Design philosophy:</strong> Minimal code. Maximum visual impact. Built as a lightweight starting point for UI/UX experiments and portfolio projects.</div>
-    </section>
+      <section class="card-wrap" aria-label="Sign in">
+        <div class="card">
+          <div class="card-head">
+            <div class="avatar">✦</div>
+            <h2>Welcome back</h2>
+            <p class="sub">Sign in to continue your journey.</p>
+          </div>
 
-    <section class="container section" id="features">
-      <div class="section-head">
-        <h2>✨ Features</h2>
-        <p>Designed to look futuristic while keeping the project easy to understand and customize.</p>
-      </div>
-      <div class="grid">
-        <article class="card"><div class="icon">🪟</div><h3>Glassmorphism</h3><p>Translucent panels, soft borders, and layered surfaces.</p></article>
-        <article class="card"><div class="icon">🌈</div><h3>Neon Gradients</h3><p>Purple and cyan accents create a vivid futuristic theme.</p></article>
-        <article class="card"><div class="icon">✨</div><h3>Motion Effects</h3><p>Smooth transitions and gentle floating animations.</p></article>
-        <article class="card"><div class="icon">🔐</div><h3>Login UI</h3><p>Email, password, remember-me, and sign-in interface concepts.</p></article>
-        <article class="card"><div class="icon">📱</div><h3>Responsive Layout</h3><p>Adapts to desktop, laptop, tablet, and mobile screens.</p></article>
-        <article class="card"><div class="icon">⚡</div><h3>Framework-Free</h3><p>Built with HTML and CSS without a frontend framework.</p></article>
-      </div>
-    </section>
+          <form id="loginForm" novalidate>
+            <div class="field">
+              <label for="email">Email address</label>
+              <div class="input-wrap">
+                <span class="input-icon" aria-hidden="true">✉</span>
+                <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required />
+              </div>
+            </div>
 
-    <section class="container section" id="tech">
-      <div class="section-head">
-        <h2>🛠️ Tech Stack</h2>
-        <p>Simple technologies, focused on the interface and visual experience.</p>
-      </div>
-      <table class="tech-table">
-        <thead><tr><th>Technology</th><th>Purpose</th></tr></thead>
-        <tbody>
-          <tr><td>🌐 HTML5</td><td>Page structure and content</td></tr>
-          <tr><td>🎨 CSS3</td><td>Styling, layout, gradients, and effects</td></tr>
-          <tr><td>✨ CSS Animations</td><td>Motion and transitions</td></tr>
-          <tr><td>📱 Responsive CSS</td><td>Layouts for different screen sizes</td></tr>
-        </tbody>
-      </table>
-    </section>
+            <div class="field">
+              <label for="password">Password</label>
+              <div class="input-wrap">
+                <span class="input-icon" aria-hidden="true">⌑</span>
+                <input id="password" name="password" type="password" placeholder="Enter your password" autocomplete="current-password" required minlength="6" />
+                <button class="toggle-pass" id="togglePassword" type="button" aria-label="Show password" title="Show password">◉</button>
+              </div>
+            </div>
 
-    <section class="container section" id="getting-started">
-      <div class="section-head">
-        <h2>🚀 Getting Started</h2>
-        <p>Run your Nova login page locally in a few simple steps.</p>
-      </div>
-      <div class="steps">
-        <article class="card"><span class="step-number">1</span><h3>Clone the repository</h3><p>Replace the placeholder with your GitHub repository URL.</p><pre>git clone https://github.com/your-username/nova-login.git</pre></article>
-        <article class="card"><span class="step-number">2</span><h3>Open the folder</h3><p>Move into the project directory.</p><pre>cd nova-login</pre></article>
-        <article class="card"><span class="step-number">3</span><h3>Launch the page</h3><p>Open <code>index.html</code> in your browser, or use VS Code Live Server.</p><pre>code .</pre></article>
-      </div>
-    </section>
+            <div class="row">
+              <label class="remember" for="remember"><input id="remember" type="checkbox" /> Remember me</label>
+              <a href="#" id="forgotLink">Forgot password?</a>
+            </div>
 
-    <section class="container section" id="structure">
-      <div class="section-head">
-        <h2>📂 Project Structure</h2>
-        <p>Keep the core project simple and organized.</p>
-      </div>
-      <pre>Nova-Login/
-├── index.html       # Main login page
-├── screenshot.png   # Actual project screenshot (optional)
-└── README.md        # Project documentation</pre>
-    </section>
+            <button class="primary" type="submit">SIGN IN&nbsp; <span aria-hidden="true">↗</span></button>
+          </form>
 
-    <section class="container section" id="roadmap">
-      <div class="section-head">
-        <h2>🔮 Future Roadmap</h2>
-        <p>Ideas for evolving the visual prototype into a more complete experience.</p>
-      </div>
-      <div class="roadmap">
-        <div>⬜ Show / hide password</div>
-        <div>⬜ Client-side form validation</div>
-        <div>⬜ Registration page</div>
-        <div>⬜ Forgot-password flow</div>
-        <div>⬜ Accessible success and error messages</div>
-        <div>⬜ Google / GitHub OAuth integration</div>
-        <div>⬜ Secure backend authentication</div>
-        <div>⬜ User dashboard and database integration</div>
-      </div>
-      <p style="color:var(--muted);font-size:.86rem;margin-top:14px;">Roadmap items are planned improvements, not features included in the current HTML/CSS prototype.</p>
-    </section>
-
-    <section class="container section" id="contributing">
-      <div class="section-head">
-        <h2>🤝 Contributing</h2>
-        <p>Ideas, suggestions, and improvements are welcome.</p>
-      </div>
-      <div class="card">
-        <pre>git checkout -b feature/new-feature
-git add .
-git commit -m "feat: improve login experience"
-git push origin feature/new-feature</pre>
-        <p style="color:var(--muted);margin-bottom:0;">Then open a Pull Request on GitHub.</p>
-      </div>
-    </section>
+          <div class="divider">OR CONTINUE WITH</div>
+          <div class="socials">
+            <button class="social" type="button" data-provider="Google"><strong style="font-size:15px">G</strong> Google</button>
+            <button class="social" type="button" data-provider="GitHub"><strong style="font-size:15px">⌘</strong> GitHub</button>
+          </div>
+          <p class="signup">New to NOVA? <a href="#" id="createAccount">Create an account</a></p>
+          <div class="secure"><span>●</span> Secure UI preview · Authentication not connected</div>
+        </div>
+      </section>
+    </div>
   </main>
 
-  <footer>
-    <div class="container">
-      <div class="brand">N<span>O</span>VA<span>.</span></div>
-      <p><strong>Design the future. One interface at a time.</strong></p>
-      <p>Made with ❤️ using HTML &amp; CSS</p>
-      <p>Created for learning, experimentation, and portfolio development.</p>
-    </div>
-  </footer>
+  <footer class="footer">NOVA © <span id="year"></span> · Design the future, one interface at a time.</footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // Decorative floating particles — no external libraries required.
+    (() => {
+      const canvas = document.getElementById('particles');
+      const ctx = canvas.getContext('2d');
+      let width = 0, height = 0, particles = [];
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function resize() {
+        const ratio = Math.min(window.devicePixelRatio || 1, 2);
+        width = window.innerWidth; height = window.innerHeight;
+        canvas.width = width * ratio; canvas.height = height * ratio;
+        canvas.style.width = width + 'px'; canvas.style.height = height + 'px';
+        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+        const count = reduceMotion ? 0 : Math.min(65, Math.floor(width / 18));
+        particles = Array.from({ length: count }, () => ({
+          x: Math.random() * width, y: Math.random() * height,
+          r: Math.random() * 1.7 + .4, speed: Math.random() * .25 + .08,
+          alpha: Math.random() * .48 + .12, drift: (Math.random() - .5) * .18
+        }));
+      }
+      function draw() {
+        ctx.clearRect(0, 0, width, height);
+        particles.forEach(p => {
+          p.y -= p.speed; p.x += p.drift;
+          if (p.y < -5) { p.y = height + 5; p.x = Math.random() * width; }
+          if (p.x < -5) p.x = width + 5;
+          if (p.x > width + 5) p.x = -5;
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(196,181,253,${p.alpha})`; ctx.fill();
+        });
+        if (!reduceMotion) requestAnimationFrame(draw);
+      }
+      resize(); draw(); window.addEventListener('resize', resize);
+    })();
+
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
+    }
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const password = document.getElementById('password');
+    const toggle = document.getElementById('togglePassword');
+    toggle.addEventListener('click', () => {
+      const isHidden = password.type === 'password';
+      password.type = isHidden ? 'text' : 'password';
+      toggle.textContent = isHidden ? '◎' : '◉';
+      toggle.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+      toggle.title = isHidden ? 'Hide password' : 'Show password';
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const email = document.getElementById('email');
+      const pass = password;
+      if (!email.value.trim() || !email.validity.valid) {
+        email.focus();
+        showToast('Please enter a valid email address.');
+        return;
+      }
+      if (!pass.value || pass.value.length < 6) {
+        pass.focus();
+        showToast('Password must contain at least 6 characters.');
+        return;
+      }
+      showToast('UI demo only — connect a backend to sign in securely.');
+    });
+
+    document.getElementById('forgotLink').addEventListener('click', event => {
+      event.preventDefault();
+      showToast('Password reset is a demo feature. Connect a backend to enable it.');
+    });
+    document.getElementById('createAccount').addEventListener('click', event => {
+      event.preventDefault();
+      showToast('Registration page is not connected yet.');
+    });
+    document.querySelectorAll('[data-provider]').forEach(button => {
+      button.addEventListener('click', () => {
+        showToast(button.dataset.provider + ' sign-in is UI only — OAuth is not configured.');
+      });
+    });
+  </script>
 </body>
 </html>
