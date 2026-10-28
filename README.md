@@ -1,3 +1,6 @@
+<div align="center">
+
+<img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=700&size=38&pause=1000&color=A855F7&center=true&vCenter=true&width=650&lines=%E2%9C%A8+NOVA;A+New+Dimension+of+Authentication;Futuristic+Login+Experience" alt="NOVA Animation"/>
 
 ### 🌌 A NEW DIMENSION OF AUTHENTICATION UI
 
@@ -377,7 +380,6 @@ This project is intended for learning, experimentation, and portfolio developmen
 
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=700&size=25&pause=1000&color=22D3EE&center=true&vCenter=true&width=550&lines=THANK+YOU+FOR+VISITING;DREAM.+DESIGN.+DEVELOP.;WELCOME+TO+NOVA" alt="NOVA Closing Animation"/>
 
 ### 🌌 NOVA
 
