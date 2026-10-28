@@ -379,7 +379,8 @@ This project is intended for learning, experimentation, and portfolio developmen
 ---
 
 <div align="center">
-
+<img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=700&size=25&pause=1000&color=22D3EE&center=true&vCenter=true&width=550&lines=THANK+YOU+FOR+VISITING;DREAM.+DESIGN.+DEVELOP.;WELCOME+TO+NOVA" alt="NOVA Closing Animation"/>
+<br>
 
 ### 🌌 NOVA
 
