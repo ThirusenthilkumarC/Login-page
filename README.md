@@ -331,8 +331,6 @@ A possible full-stack version could use the following architecture:
 │           DATABASE           │
 │            MongoDB           │
 └──────────────────────────────┘
-```
-
 *This diagram describes a potential future architecture. The current project does not include these backend services.*
 
 ## 💡 Why NOVA?
