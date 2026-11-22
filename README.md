@@ -1,3 +1,4 @@
+<div align="center">
 
 <img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=700&size=38&pause=1000&color=A855F7&center=true&vCenter=true&width=650&lines=%E2%9C%A8+NOVA;A+New+Dimension+of+Authentication;Futuristic+Login+Experience" alt="NOVA Animation"/>
 ### 🌌 A NEW DIMENSION OF AUTHENTICATION UI
